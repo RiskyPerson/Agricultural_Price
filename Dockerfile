@@ -7,6 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+
 # Expose port 8080
 EXPOSE 8080
 
