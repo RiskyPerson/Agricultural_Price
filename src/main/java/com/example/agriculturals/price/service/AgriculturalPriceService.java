@@ -68,7 +68,7 @@ public class AgriculturalPriceService {
             dayWantToGet.append(date.getDayOfMonth());
         }
         agriculturalPriceByDay.setDate(dayWantToGet.toString());
-        agriculturalPriceByDay.setUpdateTime(agriculturalPriceList.get(0).getUpdateDate());
+        agriculturalPriceByDay.setUpdateTime(agriculturalPriceList.get(0).getAgriculturalPriceKey().getUpdateDate());
         return new PriceByDayResponse(agriculturalPriceByDay);
     }
 }

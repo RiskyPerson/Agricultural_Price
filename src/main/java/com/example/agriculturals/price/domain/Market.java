@@ -16,6 +16,7 @@ import java.util.List;
 public class Market {
     @Id
     private String id;
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String name;
 //    @OneToMany(mappedBy = "market", fetch = FetchType.LAZY)
 //    private List<AgriculturalPrice> agriculturalPrices;

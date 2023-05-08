@@ -25,7 +25,6 @@ public class AgriculturalPrice {
     @MapsId("agriculturalId")
     @JoinColumn(name = "agricultural_id")
     private Agricultural agricultural;
-
-    private double price;
-    private LocalDateTime updateDate;
+    @Column(columnDefinition = "NVARCHAR(100)")
+    private String price;
 }

@@ -26,7 +26,7 @@ public class AgriculturalPriceDTO {
 //    private MarketDTO marketDTO;
 //    private AgriculturalDTO agriculturalDTO;
     @JsonProperty("price")
-    private double price;
+    private String price;
     @JsonProperty("updated")
     private LocalDateTime updateDate;
 }
