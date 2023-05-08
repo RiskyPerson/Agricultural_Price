@@ -3,7 +3,6 @@ package com.example.agriculturals.price.controller;
 import com.example.agriculturals.price.domain.Agricultural;
 import com.example.agriculturals.price.domain.AgriculturalPrice;
 import com.example.agriculturals.price.domain.Market;
-import com.example.agriculturals.price.dto.PriceByDayRequest;
 import com.example.agriculturals.price.dto.PriceByDayResponse;
 import com.example.agriculturals.price.service.AgriculturalPriceService;
 import lombok.RequiredArgsConstructor;
