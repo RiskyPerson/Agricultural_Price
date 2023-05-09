@@ -18,7 +18,7 @@ public interface MapStructMapper {
     @Mapping(target = "type", expression = "java(agriculturalPrice.getAgricultural().getType())")
     @Mapping(target = "marketId", expression = "java(agriculturalPrice.getMarket().getId())")
     @Mapping(target = "marketName", expression = "java(agriculturalPrice.getMarket().getName())")
-//    @Mapping(target = "updateDate", expression = "java(agriculturalPrice.getAgriculturalPriceKey().getUpdateDate())")
+    @Mapping(target = "updateDate", expression = "java(agriculturalPrice.getAgriculturalPriceKey().getUpdateDate())")
     AgriculturalPriceDTO agriculturalPriceToDTO(AgriculturalPrice agriculturalPrice);
     AgriculturalPrice DTOToAgriculturalPrice(AgriculturalPriceDTO agriculturalPriceDTO);
     List<AgriculturalPriceDTO> agriculturalPricesToDTOs(List<AgriculturalPrice> agriculturalPriceList);
