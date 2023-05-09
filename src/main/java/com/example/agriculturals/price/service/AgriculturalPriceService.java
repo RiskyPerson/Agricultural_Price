@@ -71,4 +71,8 @@ public class AgriculturalPriceService {
         agriculturalPriceByDay.setUpdateTime(agriculturalPriceList.get(0).getAgriculturalPriceKey().getUpdateDate());
         return new PriceByDayResponse(agriculturalPriceByDay);
     }
+    public List<AgriculturalPriceDTO> getAllAgriculturalPrice(){
+        List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
+        return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
+    }
 }
