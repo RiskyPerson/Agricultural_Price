@@ -50,7 +50,7 @@ public class AgriculturalPriceService {
         return agriculturalPriceRepository.findAllWithMarketAndAgricultural();
     }
     public PriceByDayResponse getPriceByDay(LocalDate date){
-        List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findByUpdateDate(LocalDateTime.now()).orElseThrow();
+        List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findByUpdateDate(date).orElseThrow();
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         AgriculturalPriceByDay agriculturalPriceByDay = new AgriculturalPriceByDay();
         agriculturalPriceByDay.setAgriculturalPriceDTOs(agriculturalPriceDTOList);
@@ -75,4 +75,5 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
     }
+
 }
