@@ -5,6 +5,7 @@ import com.example.agriculturals.price.domain.AgriculturalPrice;
 import com.example.agriculturals.price.domain.Market;
 import com.example.agriculturals.price.dto.AgriculturalPriceDTO;
 import com.example.agriculturals.price.dto.PriceByDayResponse;
+import com.example.agriculturals.price.dto.UpdatePriceRequest;
 import com.example.agriculturals.price.service.AgriculturalPriceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -55,6 +56,11 @@ public class AgriculturalController {
     @GetMapping("/agricultural-price-dto")
     public ResponseEntity<List<AgriculturalPriceDTO>> getAllAgriculturalPrice(){
         return ResponseEntity.ok(agriculturalPriceService.getAllAgriculturalPrice());
+    }
+    @PutMapping("/agricultural-price/update/market?{market}&product:{product}")
+    public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@PathVariable("market") String market,@PathVariable("product") String product, double minPrice, double maxPrice){
+        UpdatePriceRequest request = new UpdatePriceRequest(market, product, minPrice, maxPrice);
+        return ResponseEntity.ok(agriculturalPriceService.updatePrice(request));
     }
 
 

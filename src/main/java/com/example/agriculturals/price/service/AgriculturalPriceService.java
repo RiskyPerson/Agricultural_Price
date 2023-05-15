@@ -3,9 +3,7 @@ package com.example.agriculturals.price.service;
 import com.example.agriculturals.price.domain.Agricultural;
 import com.example.agriculturals.price.domain.AgriculturalPrice;
 import com.example.agriculturals.price.domain.Market;
-import com.example.agriculturals.price.dto.AgriculturalPriceByDay;
-import com.example.agriculturals.price.dto.AgriculturalPriceDTO;
-import com.example.agriculturals.price.dto.PriceByDayResponse;
+import com.example.agriculturals.price.dto.*;
 import com.example.agriculturals.price.mapstruct.MapStructMapper;
 import com.example.agriculturals.price.repository.AgriculturalPriceRepository;
 import com.example.agriculturals.price.repository.AgriculturalRepository;
@@ -79,5 +77,17 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
     }
-
+    public AgriculturalPriceDTO updatePrice(UpdatePriceRequest request){
+        String price;
+        if(request.getMaxPrice() == request.getMinPrice()){
+            price = Double.toString(request.getMinPrice());
+        } else{
+            price = Double.toString(request.getMaxPrice()) + " - " + Double.toString(request.getMaxPrice());
+        }
+        String marketName = request.getMarketName();
+        String product = request.getProduct();
+        agriculturalPriceRepository.updateAgriculturalPriceBy(marketName, product, price);
+        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByMarketAndProduct(marketName, product);
+        return mapStructMapper.agriculturalPriceToDTO(agriculturalPrice);
+    }
 }

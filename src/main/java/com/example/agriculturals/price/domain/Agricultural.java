@@ -18,7 +18,7 @@ public class Agricultural {
     private String type;
     @Column(columnDefinition = "NVARCHAR(50)")
     private String unit;
-    @Column(columnDefinition = "NVARCHAR(255)")
+    @Column(columnDefinition = "NVARCHAR(255) UNIQUE")
     private String product;
 //    @OneToMany(mappedBy = "agricultural", fetch = FetchType.LAZY)
 //    private List<AgriculturalPrice> agriculturalPrices;
