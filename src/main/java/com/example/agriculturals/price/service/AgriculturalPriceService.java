@@ -80,13 +80,12 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
     }
-    @Transactional
     public AgriculturalPriceDTO updatePrice(UpdatePriceRequest request){
         String price;
         if(request.getMaxPrice() == request.getMinPrice()){
             price = Double.toString(request.getMinPrice());
         } else{
-            price = Double.toString(request.getMaxPrice()) + " - " + Double.toString(request.getMaxPrice());
+            price = Double.toString(request.getMinPrice()) + " - " + Double.toString(request.getMaxPrice());
         }
         String marketName = request.getMarketName();
         String product = request.getProduct();
