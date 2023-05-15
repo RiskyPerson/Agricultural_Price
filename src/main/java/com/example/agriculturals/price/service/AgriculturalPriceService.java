@@ -90,8 +90,10 @@ public class AgriculturalPriceService {
         }
         String marketName = request.getMarketName();
         String product = request.getProduct();
-        agriculturalPriceRepository.updateAgriculturalPriceBy(marketName, product, price);
-        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow();
-        return mapStructMapper.agriculturalPriceToDTO(agriculturalPrice);
+        Market market = marketRepository.findByName(marketName).orElseThrow();
+        Agricultural agricultural = agriculturalRepository.findByProduct(product).orElseThrow();
+        agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
+        return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
     }
+
 }

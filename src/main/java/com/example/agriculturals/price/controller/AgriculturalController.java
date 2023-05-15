@@ -21,46 +21,53 @@ public class AgriculturalController {
     private final AgriculturalPriceService agriculturalPriceService;
 
     @GetMapping("/agricultural")
-    public ResponseEntity<List<Agricultural>> getAllAgricultural(){
+    public ResponseEntity<List<Agricultural>> getAllAgricultural() {
         return ResponseEntity.ok(agriculturalPriceService.getAllAgricultural());
     }
+
     @GetMapping("/markets")
-    public ResponseEntity<List<Market>> getAllMarket(){
+    public ResponseEntity<List<Market>> getAllMarket() {
         return ResponseEntity.ok(agriculturalPriceService.getAllMarket());
     }
+
     @PostMapping("/add-agricultural")
-    public ResponseEntity<Agricultural> addAgricultural(@RequestBody Agricultural agricultural){
+    public ResponseEntity<Agricultural> addAgricultural(@RequestBody Agricultural agricultural) {
         return ResponseEntity.ok(agriculturalPriceService.addAgricultural(agricultural));
     }
+
     @PostMapping("/add-agricultural-price")
-    public ResponseEntity<AgriculturalPrice> addAgriculturalPrice(@RequestBody AgriculturalPrice agriculturalPrice){
+    public ResponseEntity<AgriculturalPrice> addAgriculturalPrice(@RequestBody AgriculturalPrice agriculturalPrice) {
         return ResponseEntity.ok(agriculturalPriceService.addAgriculturalPrice(agriculturalPrice));
     }
+
     @PostMapping("/add-market")
-    public ResponseEntity<Market> addMarket(@RequestBody Market market){
+    public ResponseEntity<Market> addMarket(@RequestBody Market market) {
         return ResponseEntity.ok(agriculturalPriceService.addMarket(market));
     }
+
     @GetMapping("/agricultural/{id}")
-    public ResponseEntity<Agricultural> getAgricultural(@PathVariable @RequestBody Long id){
+    public ResponseEntity<Agricultural> getAgricultural(@PathVariable @RequestBody Long id) {
         return ResponseEntity.ok(agriculturalPriceService.getAgricultural(id));
     }
+
     @GetMapping("/agricultural-price/{date}")
-    public ResponseEntity<PriceByDayResponse> getAgriculturalPriceByDay(@PathVariable @RequestBody LocalDate date){
+    public ResponseEntity<PriceByDayResponse> getAgriculturalPriceByDay(@PathVariable @RequestBody LocalDate date) {
         return ResponseEntity.ok(agriculturalPriceService.getPriceByDay(date));
     }
 
     @GetMapping("/agricultural-price")
-    public ResponseEntity<List<AgriculturalPrice>> getAllWithMarketAndAgricultural(){
+    public ResponseEntity<List<AgriculturalPrice>> getAllWithMarketAndAgricultural() {
         return ResponseEntity.ok(agriculturalPriceService.getAllWithMarketAndAgricultural());
     }
+
     @GetMapping("/agricultural-price-dto")
-    public ResponseEntity<List<AgriculturalPriceDTO>> getAllAgriculturalPrice(){
+    public ResponseEntity<List<AgriculturalPriceDTO>> getAllAgriculturalPrice() {
         return ResponseEntity.ok(agriculturalPriceService.getAllAgriculturalPrice());
     }
+
     @PutMapping("/agricultural-price/update")
-    public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@RequestBody UpdatePriceRequest request){
+    public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@RequestBody UpdatePriceRequest request) {
         return ResponseEntity.ok(agriculturalPriceService.updatePrice(request));
     }
-
-
 }
+
