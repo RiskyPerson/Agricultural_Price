@@ -85,7 +85,7 @@ public class AgriculturalPriceService {
         if(request.getMaxPrice() == request.getMinPrice()){
             price = Double.toString(request.getMinPrice());
         } else{
-            price = Double.toString(request.getMinPrice()) + " - " + Double.toString(request.getMaxPrice());
+            price = Double.toString(request.getMinPrice()) + " - " + Double.toString(request.getMaxPrice()) + 'đ';
         }
         String marketName = request.getMarketName();
         String product = request.getProduct();
