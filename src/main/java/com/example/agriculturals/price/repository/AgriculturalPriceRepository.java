@@ -28,7 +28,7 @@ public interface AgriculturalPriceRepository extends JpaRepository<AgriculturalP
     int deleteByPrice(String price);
 
     @Query("SELECT ap FROM AgriculturalPrice ap JOIN FETCH ap.market JOIN FETCH ap.agricultural WHERE ap.market.name = :market AND ap.agricultural.product = :product")
-    AgriculturalPrice findByMarketAndProduct(@Param("market") String market,@Param("product")String product);
+    Optional<AgriculturalPrice> findByMarketAndProduct(@Param("market") String market,@Param("product")String product);
 
 
 }

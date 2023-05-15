@@ -8,12 +8,15 @@ import com.example.agriculturals.price.mapstruct.MapStructMapper;
 import com.example.agriculturals.price.repository.AgriculturalPriceRepository;
 import com.example.agriculturals.price.repository.AgriculturalRepository;
 import com.example.agriculturals.price.repository.MarketRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -77,6 +80,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
     }
+    @Transactional
     public AgriculturalPriceDTO updatePrice(UpdatePriceRequest request){
         String price;
         if(request.getMaxPrice() == request.getMinPrice()){
@@ -87,7 +91,7 @@ public class AgriculturalPriceService {
         String marketName = request.getMarketName();
         String product = request.getProduct();
         agriculturalPriceRepository.updateAgriculturalPriceBy(marketName, product, price);
-        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByMarketAndProduct(marketName, product);
+        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow();
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPrice);
     }
 }
