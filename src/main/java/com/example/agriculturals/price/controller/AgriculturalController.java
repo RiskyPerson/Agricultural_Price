@@ -58,8 +58,7 @@ public class AgriculturalController {
         return ResponseEntity.ok(agriculturalPriceService.getAllAgriculturalPrice());
     }
     @PutMapping("/agricultural-price/update")
-    public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@PathVariable("market") String market,@PathVariable("product") String product, double minPrice, double maxPrice){
-        UpdatePriceRequest request = new UpdatePriceRequest(market, product, minPrice, maxPrice);
+    public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@RequestBody UpdatePriceRequest request){
         return ResponseEntity.ok(agriculturalPriceService.updatePrice(request));
     }
 
