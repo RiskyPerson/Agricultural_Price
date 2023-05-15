@@ -69,5 +69,9 @@ public class AgriculturalController {
     public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@RequestBody UpdatePriceRequest request) {
         return ResponseEntity.ok(agriculturalPriceService.updatePrice(request));
     }
+    @PutMapping("/agricultural-price/update/v2")
+    public ResponseEntity<UpdatePriceRequest> updatePriceRequestResponseEntity(@RequestBody UpdatePriceRequest request){
+        return ResponseEntity.ok(request);
+    }
 }
 
