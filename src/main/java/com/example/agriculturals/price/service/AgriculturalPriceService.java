@@ -121,7 +121,7 @@ public class AgriculturalPriceService {
                     maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*10 + 5);
                     break;
                 default:
-                    System.out.println("Some thing went wrong");
+                    maxPrice = minPrice = 0;
                     break;
             }
             if(minPrice == maxPrice){
@@ -143,7 +143,7 @@ public class AgriculturalPriceService {
                     randomPrice = Double.parseDouble(priceInString) + Math.round(Math.random()*10 + 10);
                     break;
                 default:
-                    System.out.println("Some thing went wrong");
+                    randomPrice = 0;
                     break;
             }
             result = Double.toString(randomPrice) + "00đ";
