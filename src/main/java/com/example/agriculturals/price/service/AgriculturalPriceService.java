@@ -60,7 +60,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         for(AgriculturalPrice agriculturalPrice : agriculturalPriceList){
             System.out.println(agriculturalPrice.getPrice());
-            String randomPrice = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
+            String randomPrice = randomPrice(agriculturalPrice.getPrice(), "Thủy hải sản");
             agriculturalPrice.setPrice(randomPrice);
             System.out.println(randomPrice);
         }
