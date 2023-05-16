@@ -100,9 +100,10 @@ public class AgriculturalPriceService {
     }
     public List<String> testRandomPrice(){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
+        List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         List<String> result = new ArrayList<>();
-        for(int i = 0; i < agriculturalPriceList.size(); i++){
-            String rand = randomPrice(agriculturalPriceList.get(i).getPrice(), agriculturalPriceList.get(i).getAgricultural().getType());
+        for(int i = 0; i < agriculturalPriceDTOList.size(); i++){
+            String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
             result.add(rand);
         }
         return result;
