@@ -49,37 +49,27 @@ public class AgriculturalPriceService {
         return agriculturalPriceRepository.save(agriculturalPrice);
     }
     public List<AgriculturalPrice> getAllWithMarketAndAgricultural(){
-        List<AgriculturalPrice>  agriculturalPriceList= agriculturalPriceRepository.findAllWithMarketAndAgricultural();
-        for(AgriculturalPrice agriculturalPrice : agriculturalPriceList){
-            String randomPrice = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
-            agriculturalPrice.setPrice(randomPrice);
-        }
-        return agriculturalPriceList;
+        return agriculturalPriceRepository.findAllWithMarketAndAgricultural();
     }
     public PriceByDayResponse getPriceByDay(LocalDate date){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
-        for(AgriculturalPrice agriculturalPrice : agriculturalPriceList){
-            System.out.println(agriculturalPrice.getPrice());
-            String randomPrice = randomPrice(agriculturalPrice.getPrice(), "Thủy hải sản");
-            agriculturalPrice.setPrice(randomPrice);
-            System.out.println(randomPrice);
-        }
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         for(AgriculturalPriceDTO agriculturalPriceDTO : agriculturalPriceDTOList){
             agriculturalPriceDTO.setUpdateDate(LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, 0));
+            agriculturalPriceDTO.setPrice(randomPrice(agriculturalPriceDTO.getPrice(), agriculturalPriceDTO.getType()));
         }
         AgriculturalPriceByDay agriculturalPriceByDay = new AgriculturalPriceByDay();
         agriculturalPriceByDay.setAgriculturalPriceDTOs(agriculturalPriceDTOList);
         StringBuilder dayWantToGet = new StringBuilder();
         dayWantToGet.append(date.getYear());
         if(date.getMonthValue() < 10){
-            dayWantToGet.append("0" +date.getMonthValue());
+            dayWantToGet.append("0").append(date.getMonthValue());
         } else{
             dayWantToGet.append(date.getMonthValue());
         }
 
         if(date.getDayOfMonth() < 10){
-            dayWantToGet.append("0"+date.getDayOfMonth());
+            dayWantToGet.append("0").append(date.getDayOfMonth());
         } else{
             dayWantToGet.append(date.getDayOfMonth());
         }
