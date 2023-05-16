@@ -107,17 +107,17 @@ public class AgriculturalPriceService {
             switch (type){
                 case "Rau củ quả" :
                     minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*3);
-                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPriceInString = pieces[2].split("đ")[0];
                     maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*3);
                     break;
                 case "Thủy hải sản" :
                     minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*5 + 5);
-                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPriceInString = pieces[2].split("đ")[0];
                     maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*5 + 5);
                     break;
                 case "Thịt":
                     minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*10 + 5);
-                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPriceInString = pieces[2].split("đ")[0];
                     maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*10 + 5);
                     break;
                 default:
@@ -130,7 +130,7 @@ public class AgriculturalPriceService {
                 result = Double.toString(minPrice) + "00 - " + Double.toString(maxPrice) + "00đ";
             }
         } else{
-            String priceInString = price.substring(0, price.length()-2);
+            String priceInString = price.split("đ")[0];
             double randomPrice  = 0;
             switch (type){
                 case "Rau củ quả" :
