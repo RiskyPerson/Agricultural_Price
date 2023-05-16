@@ -103,7 +103,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         List<String> result = new ArrayList<>();
         for(int i = 0; i < agriculturalPriceDTOList.size(); i++){
-            String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
+//            String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
 
         }
         result.add("Random text");
