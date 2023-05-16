@@ -104,8 +104,10 @@ public class AgriculturalPriceService {
         List<String> result = new ArrayList<>();
         for(int i = 0; i < agriculturalPriceDTOList.size(); i++){
             String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
-            result.add(rand);
+
         }
+        result.add("Random text");
+        result.add("Another random text");
         return result;
     }
     private String randomPrice(String price, String type){
