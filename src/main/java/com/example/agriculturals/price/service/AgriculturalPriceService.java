@@ -59,8 +59,10 @@ public class AgriculturalPriceService {
     public PriceByDayResponse getPriceByDay(LocalDate date){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         for(AgriculturalPrice agriculturalPrice : agriculturalPriceList){
+            System.out.println(agriculturalPrice.getPrice());
             String randomPrice = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
             agriculturalPrice.setPrice(randomPrice);
+            System.out.println(randomPrice);
         }
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         for(AgriculturalPriceDTO agriculturalPriceDTO : agriculturalPriceDTOList){
