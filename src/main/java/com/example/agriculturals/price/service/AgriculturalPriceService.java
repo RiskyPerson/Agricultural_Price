@@ -106,7 +106,7 @@ public class AgriculturalPriceService {
 //            String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
             result.add(agriculturalPriceList.get(i).getPrice());
             result.add(agriculturalPriceList.get(i).getAgricultural().getType());
-            result.add(randomPrice(agriculturalPriceList.get(i).getPrice(), agriculturalPriceList.get(i).getAgricultural().getType()));
+            result.add(randomPrice(agriculturalPriceList.get(i).getPrice().trim(), agriculturalPriceList.get(i).getAgricultural().getType().trim()));
         }
 
         result.add("Random text");
