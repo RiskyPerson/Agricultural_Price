@@ -75,7 +75,7 @@ public class AgriculturalPriceService {
             dayWantToGet.append(date.getDayOfMonth());
         }
         agriculturalPriceByDay.setDate(dayWantToGet.toString());
-//        agriculturalPriceByDay.setUpdateTime(agriculturalPriceList.get(0).getAgriculturalPriceKey().getUpdateDate());
+        agriculturalPriceByDay.setUpdateTime(agriculturalPriceList.get(0).getAgriculturalPriceKey().getUpdateDate());
         agriculturalPriceByDay.setUpdateTime(LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, 0));
         return new PriceByDayResponse(agriculturalPriceByDay);
     }
@@ -101,8 +101,8 @@ public class AgriculturalPriceService {
     public List<String> testRandomPrice(){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
         List<String> result = new ArrayList<>();
-        for(AgriculturalPrice agriculturalPrice: agriculturalPriceList){
-            String rand = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
+        for(int i = 0; i < agriculturalPriceList.size(); i++){
+            String rand = randomPrice(agriculturalPriceList.get(i).getPrice(), agriculturalPriceList.get(i).getAgricultural().getType());
             result.add(rand);
         }
         return result;
