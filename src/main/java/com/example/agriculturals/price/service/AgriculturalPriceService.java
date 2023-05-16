@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +53,10 @@ public class AgriculturalPriceService {
     }
     public PriceByDayResponse getPriceByDay(LocalDate date){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
+        for(AgriculturalPrice agriculturalPrice : agriculturalPriceList){
+            String randomPrice = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
+            agriculturalPrice.setPrice(randomPrice);
+        }
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         for(AgriculturalPriceDTO agriculturalPriceDTO : agriculturalPriceDTOList){
             agriculturalPriceDTO.setUpdateDate(LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, 0));
@@ -83,9 +88,9 @@ public class AgriculturalPriceService {
     public AgriculturalPriceDTO updatePrice(UpdatePriceRequest request){
         String price;
         if(request.getMaxPrice() == request.getMinPrice()){
-            price = Double.toString(request.getMinPrice());
+            price = Double.toString(request.getMinPrice()/1000) + "00đ" ;
         } else{
-            price = Double.toString(request.getMinPrice()) + " - " + Double.toString(request.getMaxPrice()) + 'đ';
+            price = Double.toString(request.getMinPrice()/1000) + "00 - " + Double.toString(request.getMaxPrice()/1000) + "00đ";
         }
         String marketName = request.getMarketName();
         String product = request.getProduct();
@@ -94,5 +99,59 @@ public class AgriculturalPriceService {
         agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
     }
+    private String randomPrice(String price, String type){
+        String result = null;
+        Random random = new Random();
+        if(price.contains("-")) {
+            String[] pieces = price.split(" ");
+            double minPrice = 0,  maxPrice = 0;
+            String maxPriceInString = null;
+            switch (type){
+                case "Rau củ quả" :
+                    minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*3);
+                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*3);
+                    break;
+                case "Thủy hải sản" :
+                    minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*5 + 5);
+                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*5 + 5);
+                    break;
+                case "Thịt":
+                    minPrice = Double.parseDouble(pieces[0]) + Math.round(Math.random()*10 + 5);
+                    maxPriceInString = pieces[2].substring(0, pieces[2].length() - 2);
+                    maxPrice = Double.parseDouble(maxPriceInString) + Math.round(Math.random()*10 + 5);
+                    break;
+                default:
+                    System.out.println("Some thing went wrong");
+                    break;
+            }
+            if(minPrice == maxPrice){
+                result = Double.toString(minPrice) + "00đ";
+            } else{
+                result = Double.toString(minPrice) + "00 - " + Double.toString(maxPrice) + "00đ";
+            }
+        } else{
+            String priceInString = price.substring(0, price.length()-2);
+            double randomPrice  = 0;
+            switch (type){
+                case "Rau củ quả" :
+                    randomPrice = Double.parseDouble(priceInString) + Math.round(Math.random()*3);
+                    break;
+                case "Thủy hải sản" :
+                    randomPrice = Double.parseDouble(priceInString) + Math.round(Math.random()*5 + 5);
+                    break;
+                case "Thịt":
+                    randomPrice = Double.parseDouble(priceInString) + Math.round(Math.random()*10 + 10);
+                    break;
+                default:
+                    System.out.println("Some thing went wrong");
+                    break;
+            }
+            result = Double.toString(randomPrice) + "00đ";
+        }
+        return result;
+    }
+
 
 }
