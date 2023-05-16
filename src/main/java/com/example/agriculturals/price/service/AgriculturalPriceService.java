@@ -113,7 +113,7 @@ public class AgriculturalPriceService {
         result.add("Another random text");
         return result;
     }
-    private String randomPrice(String price, String type){
+    public String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();
         if(price.contains("-")) {
