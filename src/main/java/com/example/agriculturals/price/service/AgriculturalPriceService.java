@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -96,6 +97,15 @@ public class AgriculturalPriceService {
         Agricultural agricultural = agriculturalRepository.findByProduct(product).orElseThrow();
         agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
+    }
+    public List<String> testRandomPrice(){
+        List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
+        List<String> result = new ArrayList<>();
+        for(AgriculturalPrice agriculturalPrice: agriculturalPriceList){
+            String rand = randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType());
+            result.add(rand);
+        }
+        return result;
     }
     private String randomPrice(String price, String type){
         String result = null;
