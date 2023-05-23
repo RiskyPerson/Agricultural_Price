@@ -57,7 +57,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         for(AgriculturalPriceDTO agriculturalPriceDTO : agriculturalPriceDTOList){
             agriculturalPriceDTO.setUpdateDate(LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, 0));
-//            agriculturalPriceDTO.setPrice(randomPrice(agriculturalPriceDTO.getPrice(), agriculturalPriceDTO.getType()));
+            agriculturalPriceDTO.setPrice(randomPrice(agriculturalPriceDTO.getPrice(), agriculturalPriceDTO.getType()));
         }
         AgriculturalPriceByDay agriculturalPriceByDay = new AgriculturalPriceByDay();
         agriculturalPriceByDay.setAgriculturalPriceDTOs(agriculturalPriceDTOList);
