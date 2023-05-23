@@ -73,9 +73,5 @@ public class AgriculturalController {
     public ResponseEntity<UpdatePriceRequest> updatePriceRequestResponseEntity(@RequestBody UpdatePriceRequest request){
         return ResponseEntity.ok(request);
     }
-    @GetMapping("/randomPrice")
-    public ResponseEntity<List<String>> testRandomPrice(){
-        return ResponseEntity.ok(agriculturalPriceService.testRandomPrice());
-    }
 }
 

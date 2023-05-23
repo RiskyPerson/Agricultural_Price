@@ -57,7 +57,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
         for(AgriculturalPriceDTO agriculturalPriceDTO : agriculturalPriceDTOList){
             agriculturalPriceDTO.setUpdateDate(LocalDateTime.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth(), 0, 0, 0));
-//            agriculturalPriceDTO.setPrice(randomPrice(agriculturalPriceDTO.getPrice(), agriculturalPriceDTO.getType()));
+            agriculturalPriceDTO.setPrice(randomPrice(agriculturalPriceDTO.getPrice(), agriculturalPriceDTO.getType()));
         }
         AgriculturalPriceByDay agriculturalPriceByDay = new AgriculturalPriceByDay();
         agriculturalPriceByDay.setAgriculturalPriceDTOs(agriculturalPriceDTOList);
@@ -98,22 +98,8 @@ public class AgriculturalPriceService {
         agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
     }
-    public List<String> testRandomPrice(){
-        List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
-        List<AgriculturalPriceDTO> agriculturalPriceDTOList = mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceList);
-        List<String> result = new ArrayList<>();
-        for(int i = 0; i < agriculturalPriceDTOList.size(); i++){
-//            String rand = randomPrice(agriculturalPriceDTOList.get(i).getPrice(), agriculturalPriceDTOList.get(i).getType());
-            result.add(agriculturalPriceList.get(i).getPrice());
-            result.add(agriculturalPriceList.get(i).getAgricultural().getType());
-            result.add(randomPrice("28.000 - 30.000đ", "Rau củ quả"));
-        }
 
-        result.add("Random text");
-        result.add("Another random text");
-        return result;
-    }
-    public String randomPrice(String price, String type){
+    private String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();
         if(price.contains("-")) {
