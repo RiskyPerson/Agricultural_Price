@@ -101,7 +101,7 @@ public class AgriculturalPriceService {
     private String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();
-        if(price.contains("-")) {
+        if(price.contains("-") || price.contains("–")) {
             String[] pieces = price.split(" ");
             double minPrice = 0,  maxPrice = 0;
             String maxPriceInString = null;
