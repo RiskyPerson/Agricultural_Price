@@ -97,7 +97,14 @@ public class AgriculturalPriceService {
         agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
     }
-
+    public List<String> randomPrice(){
+        List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findAll();
+        List<String> price = new ArrayList<>();
+        for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
+            price.add(agriculturalPrice.getPrice());
+        }
+        return price;
+    }
     private String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();
