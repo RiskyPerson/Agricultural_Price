@@ -89,6 +89,10 @@ public class AgriculturalController {
     public ResponseEntity<List<String>> randomPriceV2(){
         return ResponseEntity.ok(agriculturalPriceService.randomPriceV2());
     }
+    @GetMapping("/agricultural-price/top10")
+    public ResponseEntity<List<String>> getTop10(){
+        return ResponseEntity.ok(agriculturalPriceService.findTop10());
+    }
 
 }
 

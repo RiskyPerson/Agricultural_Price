@@ -38,4 +38,6 @@ public interface AgriculturalPriceRepository extends JpaRepository<AgriculturalP
     AgriculturalPrice findByAgricultural_Id(Long id);
     @Query("SELECT ap FROM AgriculturalPrice  ap  WHERE ap.agriculturalPriceKey.marketId =:id")
     AgriculturalPrice findByAgriculturalId(@Param("id") Long id);
+    @Query("SELECT ap FROM AgriculturalPrice ap LIMIT 10")
+    List<AgriculturalPrice> findTop10();
 }

@@ -139,6 +139,15 @@ public class AgriculturalPriceService {
         }
         return result;
     }
+    public List<String> findTop10(){
+        List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findTop10();
+        List<String> result = new ArrayList<>();
+        for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
+            result.add(randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType()));
+        }
+        return result;
+    }
+
     private String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();
