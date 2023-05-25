@@ -130,6 +130,15 @@ public class AgriculturalPriceService {
 
         return price;
     }
+    public List<String> randomPriceV2(){
+        List<String> result = new ArrayList<>();
+        String price = "28.000 - 30.00đ";
+        String type = " Thủy hải sản";
+        for(int i = 0; i < 20; i++){
+            result.add(randomPrice(price, type));
+        }
+        return result;
+    }
     private String randomPrice(String price, String type){
         String result = null;
         Random random = new Random();

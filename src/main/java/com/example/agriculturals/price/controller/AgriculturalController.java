@@ -85,6 +85,10 @@ public class AgriculturalController {
     public ResponseEntity<List<String>> randomPriceByType(@PathVariable @RequestParam String type){
         return ResponseEntity.ok(agriculturalPriceService.randomPriceByProductType(type));
     }
+    @GetMapping("/random-price/v2")
+    public ResponseEntity<List<String>> randomPriceV2(){
+        return ResponseEntity.ok(agriculturalPriceService.randomPriceV2());
+    }
 
 }
 
