@@ -56,7 +56,7 @@ public class AgriculturalController {
     }
 
     @GetMapping("/agricultural-price")
-    public ResponseEntity<List<AgriculturalPrice>> getAllWithMarketAndAgricultural() {
+    public ResponseEntity<List<AgriculturalPriceDTO>> getAllWithMarketAndAgricultural() {
         return ResponseEntity.ok(agriculturalPriceService.getAllWithMarketAndAgricultural());
     }
 
@@ -69,30 +69,18 @@ public class AgriculturalController {
     public ResponseEntity<AgriculturalPriceDTO> updateAgriculturalPrice(@RequestBody UpdatePriceRequest request) {
         return ResponseEntity.ok(agriculturalPriceService.updatePrice(request));
     }
-    @PutMapping("/agricultural-price/update/v2")
-    public ResponseEntity<UpdatePriceRequest> updatePriceRequestResponseEntity(@RequestBody UpdatePriceRequest request){
-        return ResponseEntity.ok(request);
-    }
     @GetMapping("/random-price")
     public ResponseEntity<List<String>> randomPrice(){
-        return ResponseEntity.ok(agriculturalPriceService.randomPrice());
+        return ResponseEntity.ok(agriculturalPriceService.randomPriceV1());
     }
-    @GetMapping("/random-price/{id}")
+    @GetMapping("/random-price/id/{id}")
     public ResponseEntity<List<String>> randomPriceOfProduct(@PathVariable @RequestParam Long id){
         return ResponseEntity.ok(agriculturalPriceService.randomPriceSpecificProduct(id));
     }
-    @GetMapping("/random-price/{type}")
+    @GetMapping("/random-price/type/{type}")
     public ResponseEntity<List<String>> randomPriceByType(@PathVariable @RequestParam String type){
         return ResponseEntity.ok(agriculturalPriceService.randomPriceByProductType(type));
     }
-    @GetMapping("/random-price/v2")
-    public ResponseEntity<List<String>> randomPriceV2(){
-        return ResponseEntity.ok(agriculturalPriceService.randomPriceV2());
-    }
-//    @GetMapping("/agricultural-price/top10")
-//    public ResponseEntity<List<String>> getTop10(){
-//        return ResponseEntity.ok(agriculturalPriceService.findTop10());
-//    }
 
 }
 

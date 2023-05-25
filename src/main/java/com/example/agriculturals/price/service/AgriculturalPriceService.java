@@ -49,8 +49,8 @@ public class AgriculturalPriceService {
     public AgriculturalPrice addAgriculturalPrice(AgriculturalPrice agriculturalPrice){
         return agriculturalPriceRepository.save(agriculturalPrice);
     }
-    public List<AgriculturalPrice> getAllWithMarketAndAgricultural(){
-        return agriculturalPriceRepository.findAllWithMarketAndAgricultural();
+    public List<AgriculturalPriceDTO> getAllWithMarketAndAgricultural(){
+        return mapStructMapper.agriculturalPricesToDTOs(agriculturalPriceRepository.findAllWithMarketAndAgricultural());
     }
     public PriceByDayResponse getPriceByDay(LocalDate date){
         List<AgriculturalPrice> agriculturalPriceList = agriculturalPriceRepository.findAll();
@@ -105,10 +105,6 @@ public class AgriculturalPriceService {
         }
         return result;
     }
-    public List<AgriculturalPriceDTO> findByAgriculturalType(String type){
-        List<AgriculturalPrice> agriculturalPrices= agriculturalPriceRepository.findByAgricultural_Type(type);
-        return mapStructMapper.agriculturalPricesToDTOs(agriculturalPrices);
-    }
     public List<String> randomPriceSpecificProduct(Long id){
         AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByAgriculturalId(id);
         String price = agriculturalPrice.getPrice();
@@ -119,9 +115,7 @@ public class AgriculturalPriceService {
         }
         return result;
     }
-
-
-    public List<String> randomPrice(){
+    public List<String> randomPriceV1(){
         List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findAll();
         List<String> price = new ArrayList<>();
         for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
@@ -130,15 +124,7 @@ public class AgriculturalPriceService {
 
         return price;
     }
-    public List<String> randomPriceV2(){
-        List<String> result = new ArrayList<>();
-        String price = "28.000 - 30.000đ";
-        String type = "Thủy hải sản";
-        for(int i = 0; i < 20; i++){
-            result.add(randomPrice(price, type));
-        }
-        return result;
-    }
+
     public List<String> findTop10(){
         List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findTop10();
         List<String> result = new ArrayList<>();
