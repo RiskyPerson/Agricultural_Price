@@ -101,7 +101,7 @@ public class AgriculturalPriceService {
         List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findByAgricultural_Type(type);
         List<String> result = new ArrayList<>();
         for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
-            result.add(randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType()))
+            result.add(randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType()));
         }
         return result;
     }
