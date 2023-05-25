@@ -97,12 +97,37 @@ public class AgriculturalPriceService {
         agriculturalPriceRepository.updateAgriculturalPriceByMarketAndAgricultural(agricultural.getId(), market.getId(), price);
         return mapStructMapper.agriculturalPriceToDTO(agriculturalPriceRepository.findByMarketAndProduct(marketName, product).orElseThrow());
     }
+    public List<String> randomPriceByProductType(String type){
+        List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findByAgricultural_Type(type);
+        List<String> result = new ArrayList<>();
+        for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
+            result.add(randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType()))
+        }
+        return result;
+    }
+    public List<AgriculturalPriceDTO> findByAgriculturalType(String type){
+        List<AgriculturalPrice> agriculturalPrices= agriculturalPriceRepository.findByAgricultural_Type(type);
+        return mapStructMapper.agriculturalPricesToDTOs(agriculturalPrices);
+    }
+    public List<String> randomPriceSpecificProduct(Long id){
+        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByAgricultural_Id(id);
+        String price = agriculturalPrice.getPrice();
+        String type = agriculturalPrice.getAgricultural().getType();
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < 20; i++){
+            result.add(randomPrice(price, type));
+        }
+        return result;
+    }
+
+
     public List<String> randomPrice(){
         List<AgriculturalPrice> agriculturalPrices = agriculturalPriceRepository.findAll();
         List<String> price = new ArrayList<>();
         for(AgriculturalPrice agriculturalPrice: agriculturalPrices){
-            price.add(randomPrice(agriculturalPrice.getPrice(), "Thủy hải sản"));
+            price.add(randomPrice(agriculturalPrice.getPrice(), agriculturalPrice.getAgricultural().getType()));
         }
+
         return price;
     }
     private String randomPrice(String price, String type){

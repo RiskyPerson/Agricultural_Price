@@ -77,5 +77,14 @@ public class AgriculturalController {
     public ResponseEntity<List<String>> randomPrice(){
         return ResponseEntity.ok(agriculturalPriceService.randomPrice());
     }
+    @GetMapping("/random-price/{id}")
+    public ResponseEntity<List<String>> randomPriceOfProduct(@PathVariable @RequestParam Long id){
+        return ResponseEntity.ok(agriculturalPriceService.randomPriceSpecificProduct(id));
+    }
+    @GetMapping("/random-price/{type}")
+    public ResponseEntity<List<String>> randomPriceByType(@PathVariable @RequestParam String type){
+        return ResponseEntity.ok(agriculturalPriceService.randomPriceByProductType(type));
+    }
+
 }
 

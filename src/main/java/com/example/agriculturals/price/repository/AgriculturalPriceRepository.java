@@ -32,4 +32,8 @@ public interface AgriculturalPriceRepository extends JpaRepository<AgriculturalP
     Optional<AgriculturalPrice> findByMarketAndProduct(@Param("market") String market,@Param("product")String product);
 
     Optional<AgriculturalPrice> findByMarketAndAgricultural(Market market, Agricultural agricultural);
+
+    List<AgriculturalPrice> findByAgricultural_Type(String type);
+
+    AgriculturalPrice findByAgricultural_Id(Long id);
 }
