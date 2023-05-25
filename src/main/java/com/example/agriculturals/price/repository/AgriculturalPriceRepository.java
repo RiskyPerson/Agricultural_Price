@@ -36,4 +36,6 @@ public interface AgriculturalPriceRepository extends JpaRepository<AgriculturalP
     List<AgriculturalPrice> findByAgricultural_Type(String type);
 
     AgriculturalPrice findByAgricultural_Id(Long id);
+    @Query("SELECT ap FROM AgriculturalPrice  ap JOIN FETCH Agricultural a WHERE a.id = ?1 ")
+    AgriculturalPrice findByAgriculturalId(Long id);
 }

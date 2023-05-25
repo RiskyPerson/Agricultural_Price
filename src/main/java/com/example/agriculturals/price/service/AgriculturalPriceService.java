@@ -110,7 +110,7 @@ public class AgriculturalPriceService {
         return mapStructMapper.agriculturalPricesToDTOs(agriculturalPrices);
     }
     public List<String> randomPriceSpecificProduct(Long id){
-        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByAgricultural_Id(id);
+        AgriculturalPrice agriculturalPrice = agriculturalPriceRepository.findByAgriculturalId(id);
         String price = agriculturalPrice.getPrice();
         String type = agriculturalPrice.getAgricultural().getType();
         List<String> result = new ArrayList<>();
