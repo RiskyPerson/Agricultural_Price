@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Agricultural {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(columnDefinition = "NVARCHAR(50)")
     private String type;
