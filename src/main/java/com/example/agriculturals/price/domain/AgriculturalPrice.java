@@ -25,6 +25,6 @@ public class AgriculturalPrice {
     @MapsId("agriculturalId")
     @JoinColumn(name = "agricultural_id")
     private Agricultural agricultural;
-    @Column(columnDefinition = "NVARCHAR(100)")
+//    @Column(columnDefinition = "NVARCHAR(100)")
     private String price;
 }
