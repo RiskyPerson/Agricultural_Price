@@ -11,7 +11,7 @@ COPY . .
 RUN ./mvnw package -DskipTests
 
 # Set the entrypoint to run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "./target/*.jar"]
+ENTRYPOINT ["java", "-jar", "./target/agriculturals-price-0.0.1-SNAPSHOT.jar"]
 
 # Expose the port that the application listens on
 EXPOSE 8080
